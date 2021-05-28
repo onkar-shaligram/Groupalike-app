@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:groupalike/Sign%20Up/signupForm.dart';
 
 class SignUpLandingPage extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _SignUpLandingPageState extends State<SignUpLandingPage> {
                     fontWeight: FontWeight.w600),
               ),
               SizedBox(
-                height: 10,
+                height: 150,
               ),
               Divider(color: Colors.black),
               Container(
@@ -71,7 +72,8 @@ class _SignUpLandingPageState extends State<SignUpLandingPage> {
                 width: MediaQuery.of(context).size.width,
                 child: FlatButton.icon(
                   onPressed: () {
-                    //TODO
+                    Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => SignupForm()));
                   },
                   icon: Icon(Icons.arrow_upward),
                   label: Text("Create an Account"),

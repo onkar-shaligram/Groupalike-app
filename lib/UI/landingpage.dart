@@ -96,7 +96,7 @@ class _LandingPageState extends State<LandingPage> {
                   textColor: Colors.white,
                   shape: StadiumBorder(),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
+                    Navigator.pushNamed(context, '/signuplanding');
                   },
                   child: const Text(
                     'Sign Up',

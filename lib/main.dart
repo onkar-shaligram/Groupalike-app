@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         "/dobform": (BuildContext context) => CityandDOBForm(),
         "/signin": (BuildContext context) => SignIn(),
         "/signup": (BuildContext context) => SignupForm(),
+        "/signuplanding": (BuildContext context) => SignUpLandingPage(),
         "/home": (BuildContext context) => HomeScreen(),
         "/landingpage": (BuildContext context) => LandingPage(),
       },

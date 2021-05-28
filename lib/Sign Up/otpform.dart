@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_auth/email_auth.dart';
+import 'package:groupalike/Firestore/functions.dart';
 import 'package:groupalike/Sign%20Up/cityandDOBForm.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -9,8 +10,8 @@ class OTPandPasswordForm extends StatefulWidget {
   @override
   _OTPandPasswordFormState createState() => _OTPandPasswordFormState();
 
-  String email;
-  OTPandPasswordForm({this.email});
+  String email, fname, lname;
+  OTPandPasswordForm({this.email, this.fname, this.lname});
 }
 
 class _OTPandPasswordFormState extends State<OTPandPasswordForm> {
@@ -20,6 +21,7 @@ class _OTPandPasswordFormState extends State<OTPandPasswordForm> {
   bool _success;
   String _userEmail = '';
   User user;
+  String uid;
 
   @override
   void initState() {
@@ -27,30 +29,49 @@ class _OTPandPasswordFormState extends State<OTPandPasswordForm> {
     super.initState();
   }
 
-  void sendOtp()async{
+  // get current user
+
+
+  void sendOtp() async {
     ///Accessing the EmailAuth class from the package
-       EmailAuth.sessionName = "Sample";
+    EmailAuth.sessionName = "Sample";
+
     ///a boolean value will be returned if the OTP is sent successfully
     var data = await EmailAuth.sendOtp(receiverMail: widget.email);
-    if(!data){
-        ///have your error handling logic here, like a snackbar or popup widget
+    if (!data) {
+      ///have your error handling logic here, like a snackbar or popup widget
     }
   }
+
   ///create a bool method to validate if the OTP is true
-  bool verify(){
-    return(EmailAuth.validate(
+  bool verify() {
+    return (EmailAuth.validate(
         receiverMail: widget.email, //to make sure the email ID is not changed
         userOTP: otpController.value.text)); //pass in the OTP typed in
     ///This will return you a bool, and you can proceed further after that, add a fail case and a success case (result will be true/false)
   }
 
   Future<void> _register() async {
-    final  User user = (await _auth.createUserWithEmailAndPassword(
+    final User user = (await _auth.createUserWithEmailAndPassword(
       email: widget.email,
       password: passwordController.text,
     )).user;
+    
     if (user != null) {
+      print(widget.fname);
+      print(widget.lname);
+      uid = user.uid;
+      Map<String, dynamic> userInfoMap = {
+        "uid": user.uid,
+        "userEmail": user.email,
+        "displayName": widget.fname + widget.lname,
+        "password": passwordController.text
+      };
+
+      await DatabaseMethods().uploadUserInfo(user.uid, userInfoMap);
+
       setState(() {
+        DatabaseMethods().getCurrentUser();
         _success = true;
         _userEmail = user.email;
       });
@@ -152,18 +173,18 @@ class _OTPandPasswordFormState extends State<OTPandPasswordForm> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
+        onPressed: () async {
           await _register().whenComplete(() {
-          if(_success==null || _success==false || verify()==false) {
-            print('unable to register');
-            print("Success $_success");
-            print(verify().toString());
-          }
-          else {
-            print("Great Success!!");
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CityandDOBForm()));
-          }
+            if (_success == null || _success == false || verify() == false) {
+              print('unable to register');
+              print("Success $_success");
+              print(verify().toString());
+            } else {
+              
+              print("Great Success!!");
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => CityandDOBForm(uid: uid,)));
+            }
           });
         },
         child: Icon(Icons.arrow_forward),

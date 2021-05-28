@@ -7,8 +7,12 @@ class SignupForm extends StatefulWidget {
 }
 
 class _SignupFormState extends State<SignupForm> {
+
+  
   String _chosenValue;
   TextEditingController emailtextEditingController = TextEditingController();
+  TextEditingController fnameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +40,7 @@ class _SignupFormState extends State<SignupForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
+                  controller: fnameController,
                   decoration: InputDecoration(hintText: 'First Name'),
                 ),
               ),
@@ -43,6 +48,7 @@ class _SignupFormState extends State<SignupForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
+                  controller: lnameController,
                   decoration: InputDecoration(hintText: 'Last Name'),
                 ),
               ),
@@ -130,8 +136,8 @@ class _SignupFormState extends State<SignupForm> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => OTPandPasswordForm(email: emailtextEditingController.text.toString())));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => OTPandPasswordForm(email: emailtextEditingController.text.toString(), fname: fnameController.text.toString(), lname: lnameController.text.toString())));
         },
         child: Icon(Icons.arrow_forward),
       ),

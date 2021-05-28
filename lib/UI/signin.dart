@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:groupalike/UI/Homepage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 class SignIn extends StatefulWidget {
@@ -125,8 +126,10 @@ class _SignInState extends State<SignIn> {
         email: emailtextEditingController.text,
         password: passwordtextEditingController.text,
       )).user;
-      print("Signing in");
-      Navigator.pushNamed(context, '/home');
+      print(user.uid);
+      Navigator.pop(context);
+      Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen(uid: user.uid)));
     } catch (e) {
       print(e.toString());
       ScaffoldMessenger(

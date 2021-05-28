@@ -25,12 +25,13 @@ class MyApp extends StatelessWidget {
       // home: CityandDOBForm(),
       
       routes: {
-        "/": (BuildContext context) => CityandDOBForm(),
+        "/dobform": (BuildContext context) => CityandDOBForm(),
         "/signin": (BuildContext context) => SignIn(),
         "/signup": (BuildContext context) => SignupForm(),
         "/home": (BuildContext context) => HomeScreen(),
+        "/landingpage": (BuildContext context) => LandingPage(),
       },
-      initialRoute: "/signin",
+      initialRoute: "/landingpage",
     );
   }
 }

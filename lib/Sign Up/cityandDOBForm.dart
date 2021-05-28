@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:groupalike/Firestore/functions.dart';
 import 'package:groupalike/UI/Homepage.dart';
 
 class CityandDOBForm extends StatefulWidget {
   @override
   _CityandDOBFormState createState() => _CityandDOBFormState();
+
+  String uid;
+  CityandDOBForm({this.uid});
 }
 
 class _CityandDOBFormState extends State<CityandDOBForm> {
   TextEditingController dateCtl = TextEditingController();
+  TextEditingController citycontroller = TextEditingController();
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +42,7 @@ class _CityandDOBFormState extends State<CityandDOBForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
+                  controller: citycontroller,
                   decoration: InputDecoration(hintText: 'Type Here'),
                 ),
               ),
@@ -75,8 +84,11 @@ class _CityandDOBFormState extends State<CityandDOBForm> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-           Navigator.pushReplacementNamed(context, "/home");
+        onPressed: () async {
+      await DatabaseMethods().updateInfo(widget.uid, dateCtl.text.toString(), citycontroller.text.toString());
+      Navigator.pop(context);
+      Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen(uid: widget.uid,)));
         },
         child: Icon(Icons.arrow_forward),
       ),

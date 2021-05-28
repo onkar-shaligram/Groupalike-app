@@ -78,7 +78,7 @@ class _LandingPageState extends State<LandingPage> {
               width: MediaQuery.of(context).size.width - 100,
               child: OutlineButton(
                 onPressed: () {
-                  //TODO
+                  Navigator.pushNamed(context, '/signin');
                 },
                 child: Text("Sign In",style: TextStyle(fontSize: 15),),
                 borderSide: BorderSide(color: Colors.blue),
@@ -95,7 +95,9 @@ class _LandingPageState extends State<LandingPage> {
                   color: Colors.blue,
                   textColor: Colors.white,
                   shape: StadiumBorder(),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signup');
+                  },
                   child: const Text(
                     'Sign Up',
                     style: TextStyle(fontSize: 15),
@@ -103,14 +105,14 @@ class _LandingPageState extends State<LandingPage> {
                 ),
             ),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: "By clicking Sign Up, you agree with our ",
-                    style: TextStyle(color: Colors.black87)),
+                    style: TextStyle(color: Colors.black54)),
                 TextSpan(
                     text: "Terms and Conditions",
                     style: TextStyle(
@@ -122,7 +124,7 @@ class _LandingPageState extends State<LandingPage> {
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: "Learn how we process your data in our ",
-                    style: TextStyle(color: Colors.black87)),
+                    style: TextStyle(color: Colors.black54)),
                 TextSpan(
                     text: "Data policy",
                     style: TextStyle(

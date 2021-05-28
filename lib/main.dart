@@ -1,13 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:groupalike/Sign%20Up/cityandDOBForm.dart';
-import 'package:groupalike/Sign%20Up/otp&passwordForm.dart';
 import 'package:groupalike/Sign%20Up/signupForm.dart';
 import 'package:groupalike/Sign%20Up/signupLandingPage.dart';
 import 'package:groupalike/UI/Homepage.dart';
 import 'package:groupalike/UI/landingpage.dart';
 import 'package:groupalike/UI/signin.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         "/signup": (BuildContext context) => SignupForm(),
         "/home": (BuildContext context) => HomeScreen(),
       },
-      initialRoute: "/",
+      initialRoute: "/signin",
     );
   }
 }

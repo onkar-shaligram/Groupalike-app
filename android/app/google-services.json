@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "385090577175",
+    "project_id": "groupalike-assignment",
+    "storage_bucket": "groupalike-assignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385090577175:android:7bbcd9100b64fb02184d52",
+        "android_client_info": {
+          "package_name": "com.example.groupalike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385090577175-ehjnovve4ctjg0oqj17ke61t2bbo8jv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPzGOLkcgwy5SBQxPA7QlPFHezZXwTJJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385090577175-ehjnovve4ctjg0oqj17ke61t2bbo8jv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

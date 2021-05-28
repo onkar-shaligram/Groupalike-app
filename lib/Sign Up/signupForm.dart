@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groupalike/Sign%20Up/otpform.dart';
 
 class SignupForm extends StatefulWidget {
   @override
@@ -7,6 +8,8 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   String _chosenValue;
+  TextEditingController emailtextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +97,7 @@ class _SignupFormState extends State<SignupForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
+                  controller: emailtextEditingController,
                   decoration: InputDecoration(hintText: 'Enter your Email ID'),
                 ),
               ),
@@ -126,10 +130,10 @@ class _SignupFormState extends State<SignupForm> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //TODO
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => OTPandPasswordForm(email: emailtextEditingController.text.toString())));
         },
         child: Icon(Icons.arrow_forward),
-        
       ),
     );
   }
